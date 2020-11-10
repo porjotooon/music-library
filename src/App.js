@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import Switch from '@material-ui/core/Switch';
 
+// for light & dark theme
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';
 import { GlobalStyles } from './global'
 
+// components
 import Song from './components/Song';
 import Player from './components/Player';
+import Library from './components/Library'
 import './styles/app.scss'
 
-//imported the music data
+// music data
 import data from './util';
 
 
@@ -49,6 +52,7 @@ function App() {
             isPlaying={isPlaying} 
             currentSong={currentSong}
           />
+          <Library songs={songs}/>
         </div>
       </>
     </ThemeProvider>

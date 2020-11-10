@@ -9,6 +9,15 @@
   margin-left: 80%;
 }
 
+h1, h2, h3 {
+  color: #363636;
+}
+
+body {
+  font-family: lato;
+  color: #646464;
+}
+
 .song-container {
   min-height: 65vh;
   display: -webkit-box;
