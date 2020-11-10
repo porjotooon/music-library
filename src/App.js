@@ -16,6 +16,7 @@ import data from './util';
 function App() {
   const [theme, setTheme] = useState('dark');
 
+  // state for Switch
   const [state, setState] = useState(true)
 
   const toggleTheme = () => {
@@ -33,6 +34,9 @@ function App() {
 
   // this state used to show current song item
   const [currentSong, setCurrentSong] = useState(songs[0])
+
+  //playing state
+  const [isPlaying, setIsPlaying] = useState(false)
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <>
@@ -40,7 +44,11 @@ function App() {
         <Switch checked={state} onChange={toggleTheme} className="switch"/>
         <div className="App">
           <Song currentSong={currentSong}/>
-          <Player currentSong={currentSong}/>
+          <Player
+            setIsPlaying={setIsPlaying}
+            isPlaying={isPlaying} 
+            currentSong={currentSong}
+          />
         </div>
       </>
     </ThemeProvider>
