@@ -1,8 +1,27 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
-const Player = ({ setCurrentSong, songs, songInfo, setSongInfo, audioRef, currentSong, isPlaying, setIsPlaying }) => {
+const Player = ({ setSongs, setCurrentSong, songs, songInfo, setSongInfo, audioRef, currentSong, isPlaying, setIsPlaying }) => {
+
+    useEffect(() => {
+        // Add active song
+        const newSongs = songs.map((song) => {
+        if(song.id === currentSong.id){ // just the "id" here represents the song we click on. song.id represents song from state
+            return{
+                ...song,
+                active: true,
+            }
+            } else {
+                return{
+                    ...song,
+                    active: false,
+                }
+            }
+        });
+
+    setSongs(newSongs);
+    }, [currentSong])
 
     // event handler
     const playSongHandler = () => {

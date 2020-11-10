@@ -68,7 +68,7 @@ function App() {
         <Switch checked={state} onChange={toggleTheme} className="switch"/>
         <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus}/>
         <div className="App">
-          <Song currentSong={currentSong}/>
+          <Song currentSong={currentSong} isPlaying={isPlaying}/>
           <Player
             setSongInfo={setSongInfo}
             songInfo={songInfo}
@@ -77,6 +77,7 @@ function App() {
             isPlaying={isPlaying} 
             currentSong={currentSong}
             songs={songs}
+            setSongs={setSongs}
             setCurrentSong={setCurrentSong}
           />
           <Library 
