@@ -25,10 +25,28 @@ const SongDesc = styled.div`
 `
 
 
-const LibrarySong = ({ isPlaying, audioRef, song, songs, setCurrentSong, id }) => {
+const LibrarySong = ({ setSongs, isPlaying, audioRef, song, songs, setCurrentSong, id }) => {
     const songSelectHandler = () => {
         const selectedSong = songs.filter(song => song.id === id)
         setCurrentSong(selectedSong[0]) // this is done so because the selected songs is returned as an array
+
+        // Add active song
+        const newSongs = songs.map(song => {
+            if(song.id === id){ // just the "id" here represents the song we click on. song.id represents song from state
+                return{
+                    ...song,
+                    active: true,
+                }
+            } else {
+                return{
+                    ...song,
+                    active: false,
+                }
+            }
+        })
+
+        setSongs(newSongs)
+
         //check if song is playing
         if(isPlaying){
             const playPromise = audioRef.current.play()
