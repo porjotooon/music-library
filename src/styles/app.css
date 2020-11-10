@@ -5,6 +5,10 @@
           box-sizing: border-box;
 }
 
+.switch {
+  margin-left: 80%;
+}
+
 .song-container {
   min-height: 65vh;
   display: -webkit-box;
