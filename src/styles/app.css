@@ -36,6 +36,10 @@ body {
   color: #646464;
 }
 
+.selected {
+  background: violet;
+}
+
 .song-container {
   min-height: 65vh;
   display: -webkit-box;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Switch from '@material-ui/core/Switch';
 
 // for light & dark theme
@@ -18,6 +18,9 @@ import data from './util';
 
 function App() {
   const [theme, setTheme] = useState('dark');
+
+  // useReference
+  const audioRef = useRef(null)
 
   // state for Switch
   const [state, setState] = useState(true)
@@ -40,6 +43,20 @@ function App() {
 
   //playing state
   const [isPlaying, setIsPlaying] = useState(false)
+
+  // state for considering time
+  const [songInfo, setSongInfo] = useState({
+    currentTime: 0,
+    duration: 0, //default value aren't known
+  })
+
+  //we used the special "onChange" like event from 
+  //the audio tag, where we are now using that event
+  const timeUpdateHandler = (e) => {
+    const current = e.target.currentTime;
+    const duration = e.target.duration;
+    setSongInfo({...songInfo, currentTime: current, duration})
+}
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <>
@@ -48,11 +65,26 @@ function App() {
         <div className="App">
           <Song currentSong={currentSong}/>
           <Player
+            setSongInfo={setSongInfo}
+            songInfo={songInfo}
+            audioRef={audioRef}
             setIsPlaying={setIsPlaying}
             isPlaying={isPlaying} 
             currentSong={currentSong}
           />
-          <Library songs={songs} setCurrentSong={setCurrentSong}/>
+          <Library 
+            songs={songs} 
+            setCurrentSong={setCurrentSong}
+            audioRef={audioRef}
+            isPlaying={isPlaying}
+          />
+          <audio 
+                onTimeUpdate={timeUpdateHandler} 
+                ref={audioRef} 
+                src={currentSong.audio}
+                onLoadedMetadata={timeUpdateHandler}
+            >
+            </audio>
         </div>
       </>
     </ThemeProvider>

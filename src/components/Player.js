@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
-const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
-    // useReference
-    const audioRef = useRef(null)
+const Player = ({ songInfo, setSongInfo, audioRef, currentSong, isPlaying, setIsPlaying }) => {
+
     // event handler
     const playSongHandler = () => {
         if(isPlaying){
@@ -23,13 +22,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
         )
     }
 
-    //we used the special "onChange" like event from 
-    //the audio tag, where we are now using that event
-    const timeUpdateHandler = (e) => {
-        const current = e.target.currentTime;
-        const duration = e.target.duration;
-        setSongInfo({...songInfo, currentTime: current, duration})
-    }
+
 
     // handler for dragging
     const dragHandler = e => {
@@ -38,11 +31,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
                                                                // the point it's dragged to
     }
 
-    // state for considering time
-    const [songInfo, setSongInfo] = useState({
-        currentTime: 0,
-        duration: 0, //default value aren't known
-    })
     return(
         <div className='player'>
             <div className="time-control">
@@ -61,13 +49,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
                 <FontAwesomeIcon onClick={playSongHandler} className='play' size="2x" icon={isPlaying ? faPause: faPlay}/>
                 <FontAwesomeIcon className='forward' size="2x" icon={faAngleRight}/>
             </div>
-            <audio 
-                onTimeUpdate={timeUpdateHandler} 
-                ref={audioRef} 
-                src={currentSong.audio}
-                onLoadedMetadata={timeUpdateHandler}
-            >
-            </audio>
         </div>
     )
 };

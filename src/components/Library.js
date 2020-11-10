@@ -26,7 +26,8 @@ const DiLibrary = styled.div`
 //     }
 // `
 
-const Library = ({ songs, setCurrentSong }) => {
+
+const Library = ({ isPlaying, audioRef, songs, setCurrentSong }) => {
     return(
         <DiLibrary>
             <h2>Library</h2>
@@ -38,6 +39,8 @@ const Library = ({ songs, setCurrentSong }) => {
                         song={song}
                         id={song.id}
                         key={song.id}
+                        audioRef={audioRef}
+                        isPlaying={isPlaying}
                     />)}
             </div>
         </DiLibrary>

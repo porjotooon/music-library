@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import '../styles/app.scss'
 
 const Librarysongs = styled.div`
     display:flex;
@@ -23,13 +24,21 @@ const SongDesc = styled.div`
     }
 `
 
-const LibrarySong = ({ song, songs, setCurrentSong, id }) => {
+
+const LibrarySong = ({ isPlaying, audioRef, song, songs, setCurrentSong, id }) => {
     const songSelectHandler = () => {
         const selectedSong = songs.filter(song => song.id === id)
         setCurrentSong(selectedSong[0]) // this is done so because the selected songs is returned as an array
+        //check if song is playing
+        if(isPlaying){
+            const playPromise = audioRef.current.play()
+            if(playPromise !== undefined){
+                playPromise.then(audio => audioRef.current.play())
+            }
+        }
     }
     return(
-        <Librarysongs onClick={songSelectHandler}>
+        <Librarysongs onClick={songSelectHandler} className={`${song.active ? "selected" : ""}`}>
             <img alt={song.name} src={song.cover}></img>
             <SongDesc>
                 <h3>{song.name}</h3>

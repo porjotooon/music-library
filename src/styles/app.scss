@@ -33,5 +33,9 @@ body{
     color: rgb(100,100,100);
 }
 
+.selected{
+  background: violet;
+}
+
 @import "./song";
 @import "./player";
