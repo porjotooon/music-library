@@ -30,6 +30,14 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
         const duration = e.target.duration;
         setSongInfo({...songInfo, currentTime: current, duration})
     }
+
+    // handler for dragging
+    const dragHandler = e => {
+        audioRef.current.currentTime = e.target.value   /* MATCHES AND UPDATES THE AUDIO */
+        setSongInfo({...songInfo, currentTime: e.target.value}) // what this does is it follows it to 
+                                                               // the point it's dragged to
+    }
+
     // state for considering time
     const [songInfo, setSongInfo] = useState({
         currentTime: null,
@@ -44,6 +52,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
                     max={songInfo.duration} 
                     value={songInfo.currentTime} 
                     type="range" 
+                    onChange={dragHandler}
                 />
                 <p>{getTime(songInfo.duration)}</p>
             </div>
