@@ -40,8 +40,8 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
 
     // state for considering time
     const [songInfo, setSongInfo] = useState({
-        currentTime: null,
-        duration: null, //default value aren't known
+        currentTime: 0,
+        duration: 0, //default value aren't known
     })
     return(
         <div className='player'>
