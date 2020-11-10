@@ -23,9 +23,13 @@ const SongDesc = styled.div`
     }
 `
 
-const LibrarySong = ({ song }) => {
+const LibrarySong = ({ song, songs, setCurrentSong, id }) => {
+    const songSelectHandler = () => {
+        const selectedSong = songs.filter(song => song.id === id)
+        setCurrentSong(selectedSong[0]) // this is done so because the selected songs is returned as an array
+    }
     return(
-        <Librarysongs>
+        <Librarysongs onClick={songSelectHandler}>
             <img alt={song.name} src={song.cover}></img>
             <SongDesc>
                 <h3>{song.name}</h3>

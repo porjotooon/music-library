@@ -26,12 +26,19 @@ const DiLibrary = styled.div`
 //     }
 // `
 
-const Library = ({ songs }) => {
+const Library = ({ songs, setCurrentSong }) => {
     return(
         <DiLibrary>
             <h2>Library</h2>
             <div>
-                {songs.map(song => <LibrarySong song={song}/>)}
+                {songs.map(song => 
+                    <LibrarySong
+                        songs={songs} 
+                        setCurrentSong={setCurrentSong} 
+                        song={song}
+                        id={song.id}
+                        key={song.id}
+                    />)}
             </div>
         </DiLibrary>
     )
