@@ -16,20 +16,11 @@ const DiLibrary = styled.div`
         padding: 2rem;
     }
 `
-// const Librarysongs = styled.div`
-//     display:flex;
-//     align-items:center;
-//     flex-direction:column;
-//     padding: 1rem 2rem 1rem 2rem;
-//     img{
-//         width: 30%;
-//     }
-// `
 
 
-const Library = ({ setSongs, isPlaying, audioRef, songs, setCurrentSong }) => {
+const Library = ({ libraryStatus, setSongs, isPlaying, audioRef, songs, setCurrentSong }) => {
     return(
-        <DiLibrary>
+        <DiLibrary className={`${libraryStatus ? 'active-library' : "library"}`}>
             <h2>Library</h2>
             <div>
                 {songs.map(song => 

@@ -25,7 +25,8 @@
   }
 
 .switch {
-    margin-left: 80%;
+  display: block;
+  margin-left: 85%;
 }
 
 body{
@@ -34,8 +35,11 @@ body{
 }
 
 .selected{
-  background: violet;
+  background: rgb(111,135,201);
 }
+
 
 @import "./song";
 @import "./player";
+@import "./nav";
+@import "./library"

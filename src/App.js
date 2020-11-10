@@ -10,6 +10,7 @@ import { GlobalStyles } from './global'
 import Song from './components/Song';
 import Player from './components/Player';
 import Library from './components/Library'
+import Nav from './components/Nav'
 import './styles/app.scss'
 
 // music data
@@ -50,6 +51,9 @@ function App() {
     duration: 0, //default value aren't known
   })
 
+  // state for opening library
+  const [libraryStatus, setLibraryStatus] = useState(false)
+
   //we used the special "onChange" like event from 
   //the audio tag, where we are now using that event
   const timeUpdateHandler = (e) => {
@@ -62,6 +66,7 @@ function App() {
       <>
         <GlobalStyles/>
         <Switch checked={state} onChange={toggleTheme} className="switch"/>
+        <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus}/>
         <div className="App">
           <Song currentSong={currentSong}/>
           <Player
@@ -71,6 +76,8 @@ function App() {
             setIsPlaying={setIsPlaying}
             isPlaying={isPlaying} 
             currentSong={currentSong}
+            songs={songs}
+            setCurrentSong={setCurrentSong}
           />
           <Library 
             songs={songs} 
@@ -78,6 +85,7 @@ function App() {
             audioRef={audioRef}
             isPlaying={isPlaying}
             setSongs={setSongs}
+            libraryStatus={libraryStatus}
           />
           <audio 
                 onTimeUpdate={timeUpdateHandler} 
