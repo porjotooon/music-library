@@ -99,6 +99,6 @@ const Player = ({ setSongs, setCurrentSong, songs, songInfo, setSongInfo, audioR
             </div>
         </div>
     )
-};
+}; // comment
 
 export default Player;
